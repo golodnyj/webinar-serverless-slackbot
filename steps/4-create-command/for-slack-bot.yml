@@ -1,0 +1,31 @@
+openapi: 3.0.0
+info:
+  title: for-slack-bot
+  version: 1.0.0
+servers:
+  - url: HEREYOURURL # не трогаем, оставляем, как было
+paths:
+  /:
+    get:
+      x-yc-apigateway-integration:
+        type: dummy
+        content:
+          '*': Hello, World!
+        http_code: 200
+        http_headers:
+          Content-Type: text/plain
+    post:
+      x-yc-apigateway-integration:
+        type: cloud_functions
+        function_id:  <IDYOURFUNCTIONCHALLENGE> # <-- ID функции
+        service_account_id: <IDYOURACCOUNT> # <-- ID сервисного аккаунта
+      operationId: slack-challenge
+  /hello-from-serverless:
+    post:
+    x-yc-apigateway-integration:
+        type: cloud_functions
+        function_id: <IDYOURFUNCTIONHELLO> # <-- ID функции
+        service_account_id: <IDYOURACCOUNT> # <-- ID сервисного аккаунта
+      operationId: hello-from-serverless
+
+        
